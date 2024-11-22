@@ -13,6 +13,27 @@
         android:theme="@style/Theme.TimeZelkulon"
         tools:targetApi="31">
         <activity
+            android:name=".SundayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SaturdayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FridayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ThursdayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WednesdayActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".TuesdayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MondayActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

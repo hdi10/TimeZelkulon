@@ -25,7 +25,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.zelkulon.timezelkulon.ui.components.AddButton
+import de.zelkulon.timezelkulon.ui.components.FridayCard
 import de.zelkulon.timezelkulon.ui.components.MyCard
+import de.zelkulon.timezelkulon.ui.components.SaturdayCard
+import de.zelkulon.timezelkulon.ui.components.SundayCard
+import de.zelkulon.timezelkulon.ui.components.ThursdayCard
+import de.zelkulon.timezelkulon.ui.components.TuesdayCard
+import de.zelkulon.timezelkulon.ui.components.WednesdayCard
 import de.zelkulon.timezelkulon.ui.theme.TimeZelkulonTheme
 
 class MainActivity : ComponentActivity() {
@@ -56,17 +62,17 @@ private fun ScrollBoxesSmooth() {
         Spacer(modifier = Modifier.padding(2.dp))
         MyCard()
         Spacer(modifier = Modifier.padding(2.dp))
-        MyCard()
+        TuesdayCard()
         Spacer(modifier = Modifier.padding(2.dp))
-        MyCard()
+        WednesdayCard()
         Spacer(modifier = Modifier.padding(2.dp))
-        MyCard()
+        ThursdayCard()
         Spacer(modifier = Modifier.padding(2.dp))
-        MyCard()
+        FridayCard()
         Spacer(modifier = Modifier.padding(2.dp))
-        MyCard()
+        SaturdayCard()
         Spacer(modifier = Modifier.padding(2.dp))
-        MyCard()
+        SundayCard()
         AddButton {
             Toast.makeText(context,"Hooray",Toast.LENGTH_SHORT).show()
         }

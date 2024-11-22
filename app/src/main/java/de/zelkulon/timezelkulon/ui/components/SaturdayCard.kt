@@ -2,7 +2,6 @@ package de.zelkulon.timezelkulon.ui.components
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,35 +11,39 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.zelkulon.timezelkulon.R
-import de.zelkulon.timezelkulon.ui.theme.TimeZelkulonTheme
+import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
+fun getNextSaturday(): LocalDate {
+    val today = LocalDate.now()
+    val daysUntilSaturday = DayOfWeek.SATURDAY.value - today.dayOfWeek.value
+    return today.plusDays(if (daysUntilSaturday >= 0) daysUntilSaturday.toLong() else (daysUntilSaturday + 7).toLong())
+}
 
 @OptIn(ExperimentalComposeApi::class)
 @Composable
-fun MyCard() {
+fun SaturdayCard (){
+    val nextSaturday = getNextSaturday()
+    val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+    val formattedDate = nextSaturday.format(dateFormatter)
     val context = LocalContext.current
+
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 9.dp
@@ -58,14 +61,14 @@ fun MyCard() {
         Column {
             Row {
                 Image(
-                    painter = painterResource(id = R.drawable.monday),
+                    painter = painterResource(id = R.drawable.saturday),
                     contentDescription = "Card of Day",
                     modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
+                        .size(75.dp)
+                        .padding()
                 )
                 Text(
-                    text = "Elevated",
+                    text = formattedDate,
                     modifier = Modifier.padding(16.dp),
                     textAlign = TextAlign.Center
                 )
@@ -73,26 +76,11 @@ fun MyCard() {
         }
         Spacer(modifier = Modifier.padding(3.dp))
         Row {
-            Text(
-                text = LocalDate.now().dayOfMonth.toString() + "." + LocalDate.now().monthValue + "." + LocalDate.now().year,
-                modifier = Modifier.padding(horizontal = 16.dp),
-                style = TextStyle(fontSize = 12.sp),
-            )
+
             AddButton() {
-                Toast.makeText(context, "Hooray", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "It's Friday Dog!!", Toast.LENGTH_SHORT).show()
             }
         }
 
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun CardPreview() {
-    TimeZelkulonTheme {
-        Box(modifier = Modifier.padding(all = 10.dp)) {
-            MyCard()
-        }
     }
 }
