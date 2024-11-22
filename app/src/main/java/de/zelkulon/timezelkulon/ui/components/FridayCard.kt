@@ -1,5 +1,6 @@
 package de.zelkulon.timezelkulon.ui.components
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import de.zelkulon.timezelkulon.FridayActivity
+import de.zelkulon.timezelkulon.MondayActivity
 import de.zelkulon.timezelkulon.R
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -79,8 +82,7 @@ fun  FridayCard () {
         Row {
 
             AddButton() {
-                Toast.makeText(context, "It's Friday Dog!!", Toast.LENGTH_SHORT).show()
-            }
+                context.startActivity(Intent(context, FridayActivity::class.java))            }
         }
 
     }

@@ -1,10 +1,11 @@
 package de.zelkulon.timezelkulon.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.time.DayOfWeek
-
-data class Infocard (
-    val label: String,
-    val day: Enum<DayOfWeek>,
-    val timeframe: String,
-    val prioPointa: Int,
+@Entity(tableName = "info_cards")
+data class InfoCard(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val text: String,
+    val prio: Int
 )

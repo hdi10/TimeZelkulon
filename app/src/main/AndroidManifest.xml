@@ -25,7 +25,7 @@
             android:name=".ThursdayActivity"
             android:exported="false" />
         <activity
-            android:name=".WednesdayActivity2"
+            android:name=".WednesdayActivity"
             android:exported="false" />
         <activity
             android:name=".TuesdayActivity"
