@@ -1,6 +1,7 @@
 package de.zelkulon.timezelkulon
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -29,14 +30,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import de.zelkulon.timezelkulon.dao.AppDatabase
 import de.zelkulon.timezelkulon.dao.DayInfoCardViewModel
 import de.zelkulon.timezelkulon.dao.InfoCardRepository
@@ -80,14 +79,15 @@ fun ThursdayContent(viewModel: DayInfoCardViewModel,modifier: Modifier = Modifie
     Column(modifier) {
         Text(text = "Hier Daten vom Donnerstag")
 
-        InfoCardScreen(viewModel)
+        InfoCardScreenThursday(viewModel)
     }
 }
 
 
 @Composable
-fun InfoCardScreen(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier) {
+fun InfoCardScreenThursday(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier) {
     val infoCards by viewModel.infoCards.collectAsState()
+    val context = LocalContext.current // Für den Toast
 
     Column {
         // Eingabeformular
@@ -111,6 +111,15 @@ fun InfoCardScreen(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifie
             Button(onClick = {
                 if (text.isNotEmpty() && prio.isNotEmpty()) {
                     viewModel.addInfoCard(text, prio.toInt())
+                    text = "" // Felder zurücksetzen
+                    prio = ""
+                } else {
+                    // Zeige einen Toast, wenn ein Feld fehlt
+                    Toast.makeText(
+                        context,
+                        "Bitte beide Felder ausfüllen!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }) {
                 Text("Hinzufügen")
@@ -149,7 +158,7 @@ fun ImageBitmapSnippets() {
     // [END android_compose_images_bitmap_load]
 
     // [START android_compose_images_bitmap_simple]
-    val imageBitmap = ImageBitmap.imageResource(R.drawable.dog_51509)
+    //val imageBitmap = ImageBitmap.imageResource(R.drawable.dog_51509)
     // [END android_compose_images_bitmap_simple]
 }
 

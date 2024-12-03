@@ -1,6 +1,7 @@
 package de.zelkulon.timezelkulon
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -25,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import de.zelkulon.timezelkulon.dao.AppDatabase
@@ -75,6 +77,7 @@ fun FridayContent(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier
 @Composable
 fun InfoCardScreenFriday(viewModel: DayInfoCardViewModel) {
     val infoCards by viewModel.infoCards.collectAsState()
+    val context = LocalContext.current // Für den Toast
 
     Column {
         // Eingabeformular
@@ -98,6 +101,15 @@ fun InfoCardScreenFriday(viewModel: DayInfoCardViewModel) {
             Button(onClick = {
                 if (text.isNotEmpty() && prio.isNotEmpty()) {
                     viewModel.addInfoCard(text, prio.toInt())
+                    text = "" // Felder zurücksetzen
+                    prio = ""
+                } else {
+                    // Zeige einen Toast, wenn ein Feld fehlt
+                    Toast.makeText(
+                        context,
+                        "Bitte beide Felder ausfüllen!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }) {
                 Text("Hinzufügen")
