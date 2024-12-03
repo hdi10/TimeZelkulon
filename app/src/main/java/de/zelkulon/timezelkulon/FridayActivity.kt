@@ -3,8 +3,6 @@ package de.zelkulon.timezelkulon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,21 +27,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import de.zelkulon.timezelkulon.dao.AppDatabase
 import de.zelkulon.timezelkulon.dao.InfoCardRepository
-import de.zelkulon.timezelkulon.dao.InfoCardViewModel
+import de.zelkulon.timezelkulon.dao.DayInfoCardViewModel
 
 
 class FridayActivity : ComponentActivity() {
-    private lateinit var viewModel: InfoCardViewModel
+    private lateinit var viewModel: DayInfoCardViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // ViewModel initialisieren
         val dao = AppDatabase.getDatabase(this).infoCardDao()
         val repository = InfoCardRepository(dao)
-        viewModel = InfoCardViewModel(repository)
+        viewModel = DayInfoCardViewModel(repository,"Friday")
 
         setContent {
             MainFridayContent(viewModel)
@@ -53,7 +49,7 @@ class FridayActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainFridayContent(viewModel: InfoCardViewModel) {
+fun MainFridayContent(viewModel: DayInfoCardViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -68,7 +64,7 @@ fun MainFridayContent(viewModel: InfoCardViewModel) {
 }
 
 @Composable
-fun FridayContent(viewModel: InfoCardViewModel, modifier: Modifier = Modifier) {
+fun FridayContent(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(text = "Hier Daten vom Freitag")
 
@@ -77,7 +73,7 @@ fun FridayContent(viewModel: InfoCardViewModel, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun InfoCardScreenFriday(viewModel: InfoCardViewModel) {
+fun InfoCardScreenFriday(viewModel: DayInfoCardViewModel) {
     val infoCards by viewModel.infoCards.collectAsState()
 
     Column {

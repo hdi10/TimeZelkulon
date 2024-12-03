@@ -3,8 +3,6 @@ package de.zelkulon.timezelkulon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,7 +17,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,16 +28,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.wear.compose.material.rememberSwipeableState
 import de.zelkulon.timezelkulon.dao.AppDatabase
 import de.zelkulon.timezelkulon.dao.InfoCardRepository
-import de.zelkulon.timezelkulon.dao.InfoCardViewModel
-import de.zelkulon.timezelkulon.model.InfoCard
+import de.zelkulon.timezelkulon.dao.DayInfoCardViewModel
 
+/**
+ * Dienstags Aktivität
+ */
 class TuesdayActivity : ComponentActivity() {
-    private lateinit var viewModel: InfoCardViewModel
+    private lateinit var viewModel: DayInfoCardViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +44,7 @@ class TuesdayActivity : ComponentActivity() {
         // ViewModel initialisieren
         val dao = AppDatabase.getDatabase(this).infoCardDao()
         val repository = InfoCardRepository(dao)
-        viewModel = InfoCardViewModel(repository)
+        viewModel = DayInfoCardViewModel(repository,"Tuesday")
 
         setContent {
             MainTuesdayContent(viewModel)
@@ -56,9 +52,12 @@ class TuesdayActivity : ComponentActivity() {
     }
 }
 
+/**
+ * Die Composable für TopBar?
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTuesdayContent(viewModel: InfoCardViewModel) {
+fun MainTuesdayContent(viewModel: DayInfoCardViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -73,7 +72,7 @@ fun MainTuesdayContent(viewModel: InfoCardViewModel) {
 }
 
 @Composable
-fun TuesdayContent(viewModel: InfoCardViewModel, modifier: Modifier = Modifier) {
+fun TuesdayContent(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(text = "Hier sind die Daten vom Dienstag")
 
@@ -83,7 +82,7 @@ fun TuesdayContent(viewModel: InfoCardViewModel, modifier: Modifier = Modifier) 
 }
 
 @Composable
-fun InfoCardScreen(viewModel: InfoCardViewModel) {
+fun InfoCardScreen(viewModel: DayInfoCardViewModel) {
     val infoCards by viewModel.infoCards.collectAsState()
 
     Column {

@@ -1,5 +1,6 @@
 package de.zelkulon.timezelkulon
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,22 +16,30 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.res.imageResource
+
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import de.zelkulon.timezelkulon.dao.AppDatabase
+import de.zelkulon.timezelkulon.dao.DayInfoCardViewModel
+import de.zelkulon.timezelkulon.dao.InfoCardRepository
 
 class MondayActivity : ComponentActivity() {
+    private lateinit var viewModel: DayInfoCardViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val dao = AppDatabase.getDatabase(this).infoCardDao()
+        val repository = InfoCardRepository(dao)
+        viewModel = DayInfoCardViewModel(repository,"Monday")
         setContent {
-            MainMondayContent()
+            MainMondayContent(viewModel)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainMondayContent() {
+fun MainMondayContent(viewModel: DayInfoCardViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -39,18 +48,21 @@ fun MainMondayContent() {
             )
         },
         content = { paddingValues ->
-            MondayContent(Modifier.padding(paddingValues))
+            MondayContent(viewModel,Modifier.padding(paddingValues))
         }
     )
 }
 
 @Composable
-fun MondayContent(modifier: Modifier = Modifier) {
+fun MondayContent(viewModel: DayInfoCardViewModel,modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(text = "Hier Montagsdaten")
 
-        Image(painter = painterResource(id = R.drawable.dog_51509), contentDescription = "Picture of a pit bull or pug breed")
-
-        val imageBitmap = ImageBitmap.imageResource(R.drawable.dog_51509)
+//        Image(
+//            painter = painterResource(id = ),
+//            contentDescription = stringResource(id = R.string.dog_content_description)
+//        )
+//
+//        InfoCardScreen(viewModel = viewModel)
     }
 }

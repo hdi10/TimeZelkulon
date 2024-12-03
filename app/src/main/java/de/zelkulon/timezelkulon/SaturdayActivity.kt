@@ -3,8 +3,7 @@ package de.zelkulon.timezelkulon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -16,21 +15,28 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+
+import de.zelkulon.timezelkulon.dao.AppDatabase
+import de.zelkulon.timezelkulon.dao.DayInfoCardViewModel
+import de.zelkulon.timezelkulon.dao.InfoCardRepository
 
 class SaturdayActivity : ComponentActivity() {
+    private lateinit var viewModel: DayInfoCardViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val dao = AppDatabase.getDatabase(this).infoCardDao()
+        val repository = InfoCardRepository(dao)
+        viewModel = DayInfoCardViewModel(repository, "Saturday")
         setContent {
-            MainSaturdayContent()
+            MainSaturdayContent(viewModel)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainSaturdayContent() {
+fun MainSaturdayContent(viewModel: DayInfoCardViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -39,14 +45,15 @@ fun MainSaturdayContent() {
             )
         },
         content = { paddingValues ->
-            SaturdayContent(Modifier.padding(paddingValues))
+            SaturdayContent(viewModel, Modifier.padding(paddingValues))
         }
     )
 }
 
 @Composable
-fun SaturdayContent(modifier: Modifier = Modifier) {
+fun SaturdayContent(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(text = "Hier Daten vom Samstag")
+        InfoCardScreen(viewModel = viewModel)
     }
 }

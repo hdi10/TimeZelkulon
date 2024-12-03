@@ -9,11 +9,14 @@ import de.zelkulon.timezelkulon.model.InfoCard
 
 @Dao
 interface InfoCardDao {
+    @Query("SELECT * FROM info_cards WHERE day = :day ORDER BY prio ASC")
+    suspend fun getCardsForTheDay(day: String): List<InfoCard>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(infoCard: InfoCard): Long
 
-    @Query("SELECT * FROM info_cards ORDER BY prio ASC")
-    suspend fun getAllCards(): List<InfoCard>
+    //@Query("SELECT * FROM info_cards ORDER BY prio ASC")
+    //suspend fun getAllCards(): List<InfoCard>
 
     @Delete
     suspend fun delete(infoCard: InfoCard) // Direktes Löschen eines Objekts

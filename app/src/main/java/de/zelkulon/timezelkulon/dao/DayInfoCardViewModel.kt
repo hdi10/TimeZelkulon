@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 import kotlinx.coroutines.launch
 
-class InfoCardViewModel(private val repository: InfoCardRepository) : ViewModel() {
+class DayInfoCardViewModel(private val repository: InfoCardRepository,private val day: String) : ViewModel() {
     private val _infoCards = MutableStateFlow<List<InfoCard>>(emptyList())
     val infoCards: StateFlow<List<InfoCard>> = _infoCards
 
@@ -18,13 +18,12 @@ class InfoCardViewModel(private val repository: InfoCardRepository) : ViewModel(
 
     fun loadInfoCards() {
         viewModelScope.launch {
-            _infoCards.value = repository.getAllCards()
-        }
+            _infoCards.value = repository.getCardsForTheDay(day)        }
     }
 
     fun addInfoCard(text: String, prio: Int) {
         viewModelScope.launch {
-            repository.insert(InfoCard(text = text, prio = prio))
+            repository.insert(InfoCard(text = text, prio = prio, day = day))
             loadInfoCards()
         }
     }
