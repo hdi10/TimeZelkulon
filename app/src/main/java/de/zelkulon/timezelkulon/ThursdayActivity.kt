@@ -78,7 +78,10 @@ fun MainThursdayContent(viewModel: DayInfoCardViewModel) {
 fun ThursdayContent(viewModel: DayInfoCardViewModel,modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(text = "Hier Daten vom Donnerstag")
-
+        Image(
+            painter = painterResource(id = R.drawable.imagethursday),
+            contentDescription = stringResource(id = R.string.dog_content_description)
+        )
         InfoCardScreenThursday(viewModel)
     }
 }
@@ -152,7 +155,7 @@ fun InfoCardScreenThursday(viewModel: DayInfoCardViewModel, modifier: Modifier =
 fun ImageBitmapSnippets() {
     // [START android_compose_images_bitmap_load]
     Image(
-        painter = painterResource(id = R.drawable.dog_51509),
+        painter = painterResource(id = R.drawable.thursday),
         contentDescription = stringResource(id = R.string.dog_content_description)
     )
     // [END android_compose_images_bitmap_load]

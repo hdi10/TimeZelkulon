@@ -74,7 +74,8 @@ fun MondayContent(viewModel: DayInfoCardViewModel,modifier: Modifier = Modifier)
         Text(text = "Hier Montagsdaten")
 
         Image(
-            painter = painterResource(id = R.drawable.dog_51509),
+            //painter = painterResource(id = R.drawable.dog_51509),
+            painter = painterResource(id = R.drawable.imagemonday),
             contentDescription = stringResource(id = R.string.dog_content_description)
         )
 

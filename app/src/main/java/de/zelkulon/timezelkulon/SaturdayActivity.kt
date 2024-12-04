@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
@@ -69,6 +72,10 @@ fun MainSaturdayContent(viewModel: DayInfoCardViewModel) {
 fun SaturdayContent(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(text = "Hier Daten vom Samstag")
+        Image(
+            painter = painterResource(id = R.drawable.imagesaturday),
+            contentDescription = stringResource(id = R.string.dog_content_description)
+        )
         InfoCardScreenSaturday(viewModel = viewModel)
     }
 }

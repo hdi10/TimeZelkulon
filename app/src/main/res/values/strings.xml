@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TimeZelkulon</string>
     <string name="dog_content_description">Ein Bild eines PitBull oder Pug ähnlichen Hundes</string>
+    <string name="plus">plus zeichen</string>
 </resources>
