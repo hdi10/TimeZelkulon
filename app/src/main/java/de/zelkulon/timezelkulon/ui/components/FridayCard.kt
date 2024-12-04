@@ -3,6 +3,7 @@ package de.zelkulon.timezelkulon.ui.components
 import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,8 +25,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.android.material.internal.TextScale
 import de.zelkulon.timezelkulon.FridayActivity
 import de.zelkulon.timezelkulon.MondayActivity
 import de.zelkulon.timezelkulon.R
@@ -59,31 +62,25 @@ fun  FridayCard () {
         ),
         modifier = Modifier
             .fillMaxWidth() // Die Karte nimmt die gesamte verfügbare Breite ein
-            .padding(horizontal = 8.dp) // Optionaler horizontaler Padding
-            .height(200.dp) // Feste Höhe der Karte
+            .padding(horizontal = 0.73.dp) // Optionaler horizontaler Padding
+            .height(64.dp) // Feste Höhe der Karte
     ) {
-        Column {
             Row {
                 Image(
                     painter = painterResource(id = R.drawable.friday),
                     contentDescription = "Card of Day",
                     modifier = Modifier
-                        .size(75.dp)
+                        .size(50.dp)
                         .padding()
                 )
                 Text(
                     text = formattedDate,
+                    fontSize = 30.sp,
                     modifier = Modifier.padding(16.dp),
                     textAlign = TextAlign.Center
                 )
+                AddButton() {
+                    context.startActivity(Intent(context, FridayActivity::class.java))            }
             }
         }
-        Spacer(modifier = Modifier.padding(3.dp))
-        Row {
-
-            AddButton() {
-                context.startActivity(Intent(context, FridayActivity::class.java))            }
-        }
-
-    }
 }

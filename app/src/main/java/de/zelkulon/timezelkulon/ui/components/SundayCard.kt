@@ -3,6 +3,7 @@ package de.zelkulon.timezelkulon.ui.components
 import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -41,7 +42,7 @@ fun getNextSunday(): LocalDate {
 
 @OptIn(ExperimentalComposeApi::class)
 @Composable
-fun SundayCard (){
+fun SundayCard() {
     val nextSunday = getNextSunday()
     val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
     val formattedDate = nextSunday.format(dateFormatter)
@@ -58,32 +59,28 @@ fun SundayCard (){
         ),
         modifier = Modifier
             .fillMaxWidth() // Die Karte nimmt die gesamte verfügbare Breite ein
-            .padding(horizontal = 8.dp) // Optionaler horizontaler Padding
-            .height(200.dp) // Feste Höhe der Karte
+            .padding(horizontal = 0.73.dp) // Optionaler horizontaler Padding
+            .height(64.dp) // Feste Höhe der Karte
     ) {
-        Column {
-            Row {
-                Image(
-                    painter = painterResource(id = R.drawable.sunday),
-                    contentDescription = "Card of Day",
-                    modifier = Modifier
-                        .size(75.dp)
-                        .padding()
-                )
-                Text(
-                    text = formattedDate,
-                    modifier = Modifier.padding(16.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-        Spacer(modifier = Modifier.padding(3.dp))
-        Row {
 
+        Row /*(modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween)*/{
+            Image(
+                painter = painterResource(id = R.drawable.sunday),
+                contentDescription = "Card of Day",
+                modifier = Modifier
+                    .size(50.dp)
+                    .padding()
+            )
+            Text(
+                text = formattedDate,
+                fontSize = 30.sp,
+                modifier = Modifier.padding(16.dp),
+                textAlign = TextAlign.Center
+            )
             AddButton() {
                 context.startActivity(Intent(context, SundayActivity::class.java))
             }
         }
-
     }
 }

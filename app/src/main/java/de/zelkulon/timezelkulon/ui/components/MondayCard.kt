@@ -2,6 +2,7 @@ package de.zelkulon.timezelkulon.ui.components
 
 import android.content.Intent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import de.zelkulon.timezelkulon.MondayActivity
 import de.zelkulon.timezelkulon.R
 import de.zelkulon.timezelkulon.ui.theme.TimeZelkulonTheme
@@ -55,32 +57,37 @@ fun MyCard() {
         ),
         modifier = Modifier
             .fillMaxWidth() // Die Karte nimmt die gesamte verfügbare Breite ein
-            .padding(horizontal = 8.dp) // Optionaler horizontaler Padding
-            .height(200.dp) // Feste Höhe der Karte
+            .padding(horizontal = 0.73.dp) // Optionaler horizontaler Padding
+            .height(64.dp) // Feste Höhe der Karte
     ) {
-        Column {
-            Row {
-                Image(
-                    painter = painterResource(id = R.drawable.monday),
-                    contentDescription = "Card of Day",
-                    modifier = Modifier
-                        .size(75.dp)
-                        .padding()                )
-                Text(
-                    text = formattedDate,
-                    modifier = Modifier.padding(16.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-        Spacer(modifier = Modifier.padding(3.dp))
-        Row {
+
+        Row/*(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        )*/ {
+            Image(
+                painter = painterResource(id = R.drawable.monday),
+                contentDescription = "Card of Day",
+                modifier = Modifier
+                    .size(50.dp)
+                    .padding()
+            )
+            Text(
+                text = formattedDate,
+                fontSize = 30.sp,
+                modifier = Modifier.padding(16.dp),
+                textAlign = TextAlign.Center
+            )
             AddButton() {
                 context.startActivity(Intent(context, MondayActivity::class.java))
             }
         }
 
     }
+
+
+
+
 }
 
 

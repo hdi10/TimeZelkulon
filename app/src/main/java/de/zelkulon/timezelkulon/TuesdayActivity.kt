@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import de.zelkulon.timezelkulon.dao.AppDatabase
 import de.zelkulon.timezelkulon.dao.InfoCardRepository
 import de.zelkulon.timezelkulon.dao.DayInfoCardViewModel
+import de.zelkulon.timezelkulon.ui.theme.TimeZelkulonTheme
 
 /**
  * Dienstags Aktivität
@@ -49,7 +50,10 @@ class TuesdayActivity : ComponentActivity() {
         viewModel = DayInfoCardViewModel(repository,"Tuesday")
 
         setContent {
-            MainTuesdayContent(viewModel)
+            TimeZelkulonTheme {
+                MainTuesdayContent(viewModel)
+            }
+
         }
     }
 }
@@ -57,9 +61,10 @@ class TuesdayActivity : ComponentActivity() {
 /**
  * Die Composable für TopBar?
  */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTuesdayContent(viewModel: DayInfoCardViewModel) {
+private fun MainTuesdayContent(viewModel: DayInfoCardViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(

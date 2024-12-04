@@ -18,7 +18,7 @@ import de.zelkulon.timezelkulon.ui.theme.TimeZelkulonTheme
 @Composable
 fun AddButton(onClick: () -> Unit) {
     FilledTonalButton(onClick = { onClick() }) {
-        Text("Füge Notiz zu dem Tag hinzu")
+        Text("\uD83C\uDD97")
     }
 }
 
