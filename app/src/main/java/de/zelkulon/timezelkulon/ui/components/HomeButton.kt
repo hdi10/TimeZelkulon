@@ -13,35 +13,33 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import de.zelkulon.timezelkulon.R
-
 import de.zelkulon.timezelkulon.ui.theme.TimeZelkulonTheme
 
-@OptIn(ExperimentalComposeApi::class)
 @Composable
-fun AddButton(onClick: () -> Unit) {
+fun HomeButton(onClick: () -> Unit) {
     FilledTonalButton(onClick = { onClick() }) {
         //Text("\uD83C\uDD97")
         Image(
-            painter = painterResource(id = R.drawable.add_button_invertet_color_to_alpha),
-            contentDescription = stringResource(id = R.string.plus)
+            painter = painterResource(id = R.drawable.home_button_invertet_color_to_alpha),
+                        contentDescription = stringResource(id = R.string.home)
         )        //Text(materialIcon() text = "➕", fontWeight = FontWeight.Bold, fontSize = 16.sp, style = LocalTextStyle.current)
     }
 }
 
 
-
 @Preview(showBackground = true)
 @Composable
-fun AddButtonPrevie(){
+fun HomeButtonPreview(){
     TimeZelkulonTheme {
         val context = LocalContext.current
         fun toast(){
-            Toast.makeText(context,"Hoooraaay",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"Hoooraaay", Toast.LENGTH_SHORT).show()
         }
 
         Box(modifier = Modifier.padding(all = 5.dp)) {
-            AddButton (){
+            HomeButton (){
                 toast()
             }
         }

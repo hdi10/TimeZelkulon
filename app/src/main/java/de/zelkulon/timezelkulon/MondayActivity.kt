@@ -1,16 +1,19 @@
 package de.zelkulon.timezelkulon
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -33,10 +36,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.zelkulon.timezelkulon.dao.AppDatabase
 import de.zelkulon.timezelkulon.dao.DayInfoCardViewModel
 import de.zelkulon.timezelkulon.dao.InfoCardRepository
+import de.zelkulon.timezelkulon.ui.components.HomeButton
+import de.zelkulon.timezelkulon.ui.theme.TimeZelkulonTheme
 
 class MondayActivity : ComponentActivity() {
     private lateinit var viewModel: DayInfoCardViewModel
@@ -45,7 +51,7 @@ class MondayActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val dao = AppDatabase.getDatabase(this).infoCardDao()
         val repository = InfoCardRepository(dao)
-        viewModel = DayInfoCardViewModel(repository,"Monday")
+        viewModel = DayInfoCardViewModel(repository, "Monday")
         setContent {
             MainMondayContent(viewModel)
         }
@@ -63,15 +69,21 @@ fun MainMondayContent(viewModel: DayInfoCardViewModel) {
             )
         },
         content = { paddingValues ->
-            MondayContent(viewModel,Modifier.padding(paddingValues))
+            MondayContent(viewModel, Modifier.padding(paddingValues))
         }
     )
 }
 
 @Composable
-fun MondayContent(viewModel: DayInfoCardViewModel,modifier: Modifier = Modifier) {
+fun MondayContent(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier) {
+    val context = LocalContext.current // Für den HomeButton
     Column(modifier) {
-        Text(text = "Hier Montagsdaten")
+
+            HomeButton {
+                context.startActivity(Intent(context, MainActivity::class.java))
+            }
+
+
 
         Image(
             //painter = painterResource(id = R.drawable.dog_51509),
@@ -144,5 +156,8 @@ fun InfoCardScreenMonday(viewModel: DayInfoCardViewModel) {
                 }
             }
         }
+
+
     }
 }
+

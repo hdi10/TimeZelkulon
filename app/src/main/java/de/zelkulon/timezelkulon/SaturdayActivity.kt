@@ -1,5 +1,6 @@
 package de.zelkulon.timezelkulon
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -37,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import de.zelkulon.timezelkulon.dao.AppDatabase
 import de.zelkulon.timezelkulon.dao.DayInfoCardViewModel
 import de.zelkulon.timezelkulon.dao.InfoCardRepository
+import de.zelkulon.timezelkulon.ui.components.HomeButton
 
 class SaturdayActivity : ComponentActivity() {
     private lateinit var viewModel: DayInfoCardViewModel
@@ -71,7 +73,10 @@ fun MainSaturdayContent(viewModel: DayInfoCardViewModel) {
 @Composable
 fun SaturdayContent(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier) {
     Column(modifier) {
-        Text(text = "Hier Daten vom Samstag")
+        val context = LocalContext.current // Für den HomeButton
+        HomeButton {
+            context.startActivity(Intent(context, MainActivity::class.java))
+        }
         Image(
             painter = painterResource(id = R.drawable.imagesaturday),
             contentDescription = stringResource(id = R.string.dog_content_description)
