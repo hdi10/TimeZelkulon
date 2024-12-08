@@ -157,7 +157,16 @@ fun InfoCardScreenMonday(viewModel: DayInfoCardViewModel) {
             }
         }
 
+        Row {
+            val context = LocalContext.current
+            Button(onClick = {
+                val intent = Intent(context, MainActivity::class.java)
+                context.startActivity(intent)
+            }) {
+                Text("Go back to MainActivity")
+            }
 
+        }
     }
-}
 
+}
