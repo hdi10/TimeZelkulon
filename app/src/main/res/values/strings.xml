@@ -3,4 +3,5 @@
     <string name="dog_content_description">Ein Bild eines PitBull oder Pug ähnlichen Hundes</string>
     <string name="plus">plus zeichen</string>
     <string name="home">home</string>
+    <string name="back_arrow_button_icon_description">back button as left arrow</string>
 </resources>

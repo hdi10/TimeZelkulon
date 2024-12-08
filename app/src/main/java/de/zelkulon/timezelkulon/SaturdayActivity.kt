@@ -154,6 +154,10 @@ fun InfoCardScreenSaturday(viewModel: DayInfoCardViewModel) {
                 context.startActivity(intent)
             }) {
                 Text("Go back to MainActivity")
+                Image(
+                    painter = painterResource(id = R.drawable.backarrowbutton3),
+                    contentDescription = stringResource(id = R.string.back_arrow_button_icon_description)
+                )
             }
 
         }
