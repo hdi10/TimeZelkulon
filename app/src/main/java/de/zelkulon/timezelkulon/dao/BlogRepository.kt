@@ -1,14 +1,28 @@
 package de.zelkulon.timezelkulon.dao
 
+import de.zelkulon.timezelkulon.api.BlogApiService
+import de.zelkulon.timezelkulon.dao.BlogDao
 import de.zelkulon.timezelkulon.model.Blog
 import kotlinx.coroutines.flow.Flow
 
-class BlogRepository(private val blogDao: BlogDao) {
-    // Lade alle Blogs aus der Datenbank
-    fun getAllBlogs(): Flow<List<Blog>> = blogDao.getAllBlogs() // Direkt als Flow zurückgeben
+class BlogRepository(
+    private val blogDao: BlogDao,
+    private val blogApiService: BlogApiService
+) {
 
-    // Füge Blogs in die Datenbank ein
-    suspend fun insertBlogs(blogs: List<Blog>) {
-        blogDao.insertBlogs(blogs)
+
+
+    // Holt Blogs aus der lokalen Datenbank
+    fun getLocalBlogs(): Flow<List<Blog>> = blogDao.getAllBlogs()
+
+    // Lädt Blogs von der API
+    suspend fun fetchBlogsFromApi(): List<Blog> {
+        return blogApiService.getBlogs()
+    }
+
+    // Synchronisiert API-Blogs mit der lokalen Datenbank
+    suspend fun syncBlogs() {
+        val apiBlogs = fetchBlogsFromApi()
+        blogDao.insertBlogs(apiBlogs) // Speichert die API-Blogs in der lokalen Datenbank
     }
 }
