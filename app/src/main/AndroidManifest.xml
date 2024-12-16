@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TimeZelkulon"
         tools:targetApi="31">
         <activity
+            android:name=".BlogActivity"
+            android:exported="false" />
+        <activity
             android:name=".SundayActivity"
             android:exported="false" />
         <activity

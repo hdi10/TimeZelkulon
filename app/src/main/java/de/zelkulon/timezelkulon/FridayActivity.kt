@@ -33,7 +33,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import de.zelkulon.timezelkulon.dao.AppDatabase
 import de.zelkulon.timezelkulon.dao.InfoCardRepository
 import de.zelkulon.timezelkulon.dao.DayInfoCardViewModel
 import de.zelkulon.timezelkulon.ui.components.HomeButton
@@ -75,7 +74,7 @@ fun FridayContent(viewModel: DayInfoCardViewModel, modifier: Modifier = Modifier
     Column(modifier) {
         val context = LocalContext.current // Für den HomeButton
         HomeButton {
-            context.startActivity(Intent(context, MainActivity::class.java))
+            context.startActivity(Intent(context, BlogActivity::class.java))
         }
         Image(
             painter = painterResource(id = R.drawable.imagefriday),
