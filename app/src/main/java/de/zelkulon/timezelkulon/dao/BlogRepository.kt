@@ -1,7 +1,6 @@
 package de.zelkulon.timezelkulon.dao
 
 import de.zelkulon.timezelkulon.api.BlogApiService
-import de.zelkulon.timezelkulon.dao.BlogDao
 import de.zelkulon.timezelkulon.model.Blog
 import kotlinx.coroutines.flow.Flow
 
@@ -25,4 +24,10 @@ class BlogRepository(
         val apiBlogs = fetchBlogsFromApi()
         blogDao.insertBlogs(apiBlogs) // Speichert die API-Blogs in der lokalen Datenbank
     }
+
+    suspend fun postBlog(blog: Blog) {
+        val response = blogApiService.insertBlog(blog)
+        blogDao.postBlog(response) // Optional: Lokale Speicherung
+    }
+
 }

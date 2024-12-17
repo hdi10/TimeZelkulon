@@ -10,7 +10,7 @@ data class Blog(
     val title: String,
     val artist: String,
     val location: String,
-    val timestamp: Date     // kein Fehler--> TypeConverter DateConverter
+    val timestamp: String     // kein Fehler--> TypeConverter DateConverter
 )
 
 

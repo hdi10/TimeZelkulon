@@ -1,3 +1,9 @@
+/**
+ * Harun Dastekin Dec.2024 Friday Activity
+ *
+ * In der Friday Activity werden die TaskListen erstellt
+ * Mit dem HomeButton gelangt man in die BlogListe BlogActivity.kt
+ */
 package de.zelkulon.timezelkulon
 
 import android.content.Intent

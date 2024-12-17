@@ -38,4 +38,16 @@ class BlogViewModel(private val repository: BlogRepository) : ViewModel() {
             }
         }
     }
+
+    fun postBlog(blog: Blog) {
+        viewModelScope.launch {
+            try {
+                repository.postBlog(blog) // Blog an die API senden und optional lokal speichern
+                syncBlogsFromApi()        // Lade die aktualisierten Blogs nach dem Posten
+            } catch (e: Exception) {
+                e.printStackTrace() // Fehlerbehandlung
+            }
+        }
+    }
+
 }

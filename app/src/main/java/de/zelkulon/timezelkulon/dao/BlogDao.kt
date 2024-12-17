@@ -15,4 +15,6 @@ interface BlogDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBlogs(blogs: List<Blog>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+        suspend fun postBlog(blog: Blog)
 }
